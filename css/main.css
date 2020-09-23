@@ -1,0 +1,105 @@
+body {
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #292c1c;
+}
+
+h1 {
+    margin-top: 40px;
+    padding-top: 20px;
+    color: snow;
+}
+
+.game-body {
+    background-image: url('/imges/militaryBg.jpg');
+    background-image: image(cover);
+    position: relative;
+    margin: 20px auto;
+    height: 700px;
+    min-width: 600px;
+    max-width: 600px;
+    min-height: 500px;
+    max-height: 800px;
+    background-color: #709fb0;
+    border-radius: 2%;
+}
+
+.buttons {
+    position: absolute;
+    left: 25%;
+    bottom: 0px;
+}
+
+button {
+    outline: none;
+    border: none;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    background-color: #a0c1b8;
+}
+
+button:hover {
+    background-color: #bddfd6;
+}
+
+table {
+    position: relative;
+    margin: auto auto;
+    margin-top: 20px;
+    padding: 50px;
+    margin-bottom: 70px;
+    box-shadow: 2px 2px 60px #b4a681 inset;
+}
+
+tr,
+td {
+    background-color: #d6e0f0;
+    width: 30px;
+    height: 30px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+td {
+    box-shadow: 2px 2px 1px white inset;
+}
+
+.shown {
+    background-color: #a8b1c1;
+    box-shadow: 2px 2px 1px gray inset;
+}
+
+.mine-revaeled {
+    background-color: red;
+}
+
+.stats {
+    background-color: #f9d89c;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 25px;
+}
+
+.lives-span,
+.timer-span {
+    width: 200px;
+    width: 50px;
+}
+
+.lives-span {
+    margin-right: 90px;
+}
+
+.time-container {
+    display: inline;
+}
+
+.lives-container {
+    display: inline;
+}
+
+.choosen-btn {
+    background-color: #f4ebc1;
+}
