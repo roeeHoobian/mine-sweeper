@@ -12,7 +12,7 @@ h1 {
 }
 
 .game-body {
-    background-image: url('imges/militaryBg.jpg');
+    background-image: url('imges/militarybg.jpg');
     background-image: image(cover);
     position: relative;
     margin: 20px auto;
