@@ -1,20 +1,28 @@
 body {
+    background-image: radial-gradient(circle, #ba9b5e14, #b4a681);
     text-align: center;
-    cursor: pointer;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #292c1c;
+    min-width: 750px;
+    overflow: hidden;
 }
 
 h1 {
-    margin-top: 40px;
-    padding-top: 20px;
+    margin-top: 10px;
+    padding-top: 10px;
     color: snow;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-stretch: wider;
+    letter-spacing: 0.5em;
+    color: #2a2927;
+    text-shadow: 2px 2px 25px white;
+    font-size: 2.7em;
 }
 
 .game-body {
-    background-image: url('../imges/militarybg.jpg');
+    background-image: url("../imges/militarybg.jpg");
     position: relative;
-    margin: 20px auto;
+    margin: auto;
+    margin-top: 50px;
     height: 700px;
     min-width: 600px;
     max-width: 600px;
@@ -22,6 +30,7 @@ h1 {
     max-height: 800px;
     background-color: #709fb0;
     border-radius: 2%;
+    box-shadow: -5px 5px 15px black, 5px 15px 25px #393939 inset;
 }
 
 .buttons {
@@ -37,18 +46,39 @@ button {
     height: 50px;
     font-weight: bold;
     background-color: #a0c1b8;
+    font-size: large;
 }
 
 button:hover {
     background-color: #bddfd6;
 }
 
+.choosen-btn {
+    background-color: #f4ebc1;
+    box-shadow: 2px 2px 7px #2b2a28 inset;
+}
+
+.smile {
+    position: relative;
+    height: 20px;
+    width: 40px;
+    left: 46.2%;
+    font-size: 2em;
+    cursor: pointer;
+}
+
 table {
     position: relative;
     margin: auto auto;
-    margin-top: 20px;
-    padding: 50px;
-    margin-bottom: 70px;
+    margin-top: 10px;
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: -5px 65px 35px black;
+    cursor: pointer;
+}
+
+.mine-explode {
+    animation: .5s linear 1s infinite alternate slidein;
 }
 
 tr,
@@ -64,20 +94,31 @@ td {
     box-shadow: 2px 2px 1px white inset;
 }
 
+td:hover {
+    background-color: #f9fafd;
+}
+
 .shown {
     background-color: #a8b1c1;
     box-shadow: 2px 2px 1px gray inset;
 }
 
 .mine-revaeled {
-    background-color: red;
+    background-color: #ffcece;
+}
+
+.mine-revaeled:hover {
+    background-color: #ffcece;
 }
 
 .stats {
-    background-color: #f9d89c;
+    position: relative;
+    background-color: #803535;
+    color: whitesmoke;
     font-size: 1.5em;
     font-weight: bold;
-    padding: 25px;
+    padding: 15px;
+    height: 60px;
 }
 
 .lives-span,
@@ -90,14 +131,95 @@ td {
     margin-right: 90px;
 }
 
+.best-time-h2 {
+    font-size: 0.6em;
+    font-weight: 500;
+}
+
 .time-container {
+    position: absolute;
+    right: 37%;
+    top: -5%;
+    font-size: 1.2em;
     display: inline;
+}
+
+.best-time-container {
+    width: 150px;
 }
 
 .lives-container {
-    display: inline;
+    position: absolute;
+    left: 3%;
+    top: 13%;
 }
 
-.choosen-btn {
-    background-color: #f4ebc1;
+.hints-container {
+    position: absolute;
+    right: -141%;
+    top: 7%;
+    width: 100px;
+}
+
+.hint0,
+.hint1,
+.hint2 {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.hint-used {
+    opacity: 0.3;
+}
+
+.safe-container {
+    position: absolute;
+    font-size: 24px;
+    right: -80%;
+    top: 13%;
+    width: 100px;
+}
+
+.safe0,
+.safe1,
+.safe2 {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.safe-used {
+    opacity: 0.3;
+}
+
+.safe-cell {
+    background-color: rgb(19, 82, 255);
+    transition: all;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+}
+
+.ak-47 {
+    height: 70%;
+    position: absolute;
+    top: 210px;
+    right: -110px;
+    transform: rotate(2deg);
+    opacity: 0.9;
+}
+
+.ribbon {
+    position: absolute;
+    top: 85px;
+    right: -128px
+}
+
+.boots {
+    position: absolute;
+    bottom: -30px;
+    left: -90px;
+    opacity: 0.8;
+}
+
+.hidden {
+    visibility: hidden;
 }
