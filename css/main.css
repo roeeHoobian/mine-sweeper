@@ -119,6 +119,7 @@ td:hover {
     font-weight: bold;
     padding: 15px;
     height: 60px;
+    box-shadow: -5px 0px 5px black inset;
 }
 
 .lives-span,
@@ -209,17 +210,30 @@ td:hover {
 
 .ribbon {
     position: absolute;
-    top: 85px;
+    top: 87px;
     right: -128px
 }
 
 .boots {
     position: absolute;
     bottom: -30px;
-    left: -90px;
+    left: -50px;
     opacity: 0.8;
+    width: 22%;
 }
 
 .hidden {
     visibility: hidden;
+}
+
+.mines-counter {
+    position: absolute;
+    left: 2%;
+    top: 55%;
+}
+
+.flags-counter {
+    position: absolute;
+    left: 19%;
+    top: 55%;
 }

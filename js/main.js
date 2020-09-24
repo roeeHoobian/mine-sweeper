@@ -43,18 +43,20 @@ function init() {
     updateBestTime(gGame.difficulty);
     updateHints();
     updateSafes();
+    updateMinesCounter();
 }
 
 function initStats() {
     timer = 0;
     gGame.lives = 3;
+    gGame.hints = 3;
+    gGame.isOn = false;
+    gGame.safeMoves = 3;
+    gGame.isHint = false;
     gGame.shownCount = 0;
     gGame.markedCount = 0;
     gGame.secsPassed = 0;
-    gGame.hints = 3;
-    gGame.safeMoves = 3;
-    gGame.isHint = false;
-    gGame.isOn = false;
+    emptyPositions = [];
     isFirstCellRevealed = false;
     var elSmile = document.querySelector('.smile');
     elSmile.innerText = PLAYER;
@@ -113,9 +115,6 @@ function chooseDifficulty(btn, size, mines) {
 }
 
 function checkGameOver() {
-    console.log()
-    console.log()
-    console.log()
     if (gGame.markedCount === gLevel.mines &&
         gGame.shownCount === (gLevel.size ** 2 - gLevel.mines)) {
         clearInterval(timer);
@@ -150,7 +149,6 @@ function useSafe(elSafe) {
     setTimeout(() => {
         elCell.classList.remove('safe-cell')
     }, 500);
-    console.log(elCell)
 }
 
 function updateSafes() {
@@ -198,5 +196,15 @@ function updateLives() {
     for (var i = 0; i < gGame.lives; i++) {
         liveStr += LIVE;
     }
-    elLives.innerText = liveStr
+    elLives.innerText = liveStr;
+}
+
+function updateMinesCounter() {
+    var elMinesStats = document.querySelector('.mines-counter-span');
+    elMinesStats.innerText = gLevel.mines;
+}
+
+function updateMarkedCounter() {
+    var elMarkedStats = document.querySelector('.flags-counter-span');
+    elMarkedStats.innerText = gGame.markedCount;
 }

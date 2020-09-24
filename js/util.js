@@ -14,13 +14,13 @@ function SaveBestTime(difficulty, time) {
                 gGame.bestTimeMedium = time - 1;
                 localStorage.setItem("bestTimeMedium", time);
             }
-            break
+            break;
         case 'HARD':
             if (time < gGame.bestTimeHard && time > 0) {
                 gGame.bestTimeHard = time - 1;
                 localStorage.setItem("bestTimeHard", time);
             }
-            break
+            break;
     }
 }
 
@@ -33,28 +33,28 @@ function updateBestTime(difficulty) {
             gGame.bestTimeEasy = localStorage.getItem("bestTimeEasy");
             if (gGame.bestTimeEasy) {
                 var elBestTime = document.querySelector('.best-time');
-                elBestTime.innerText = `${gGame.bestTimeEasy-1} sec`;
+                elBestTime.innerText = `${gGame.bestTimeEasy - 1} sec`;
                 bestTime.classList.remove('hidden');
             }
-            break
+            break;
         case 'MEDIUM':
             if (!localStorage.getItem("bestTimeMedium")) return;
             gGame.bestTimeMedium = localStorage.getItem("bestTimeMedium");
             if (gGame.bestTimeMedium) {
                 var elBestTime = document.querySelector('.best-time');
-                elBestTime.innerText = `${gGame.bestTimeMedium-1} sec`;
+                elBestTime.innerText = `${gGame.bestTimeMedium - 1} sec`;
                 bestTime.classList.remove('hidden');
             }
-            break
+            break;
         case 'HARD':
             if (!localStorage.getItem("bestTimeHard")) return;
             gGame.bestTimeHard = localStorage.getItem("bestTimeHard");
             if (gGame.bestTimeHard) {
                 var elBestTime = document.querySelector('.best-time');
-                elBestTime.innerText = `${gGame.bestTimeHard-1} sec`;
+                elBestTime.innerText = `${gGame.bestTimeHard - 1} sec`;
                 bestTime.classList.remove('hidden');
             }
-            break
+            break;
     }
 }
 
@@ -66,7 +66,7 @@ function getAllEmptyCells(board) {
             if (currCell.isShown) continue;
             if (currCell.isMine) continue;
             if (currCell.isMarked) continue;
-            var currPos = { i: i, j: j }
+            var currPos = { i: i, j: j };
             emptyCellPositions.push(currPos);
         }
     }
@@ -87,7 +87,13 @@ function getAllCellsPositions(board) {
 
 function updateTime() {
     var elTimer = document.querySelector('.timer-span');
-    elTimer.innerText = gGame.secsPassed < 10 ? `00${gGame.secsPassed}` : `0${gGame.secsPassed}`;
+    if (gGame.secsPassed < 10) {
+        elTimer.innerText = `00${gGame.secsPassed}`;
+    } else if (gGame.secsPassed < 99) {
+        elTimer.innerText = `0${gGame.secsPassed}`;
+    } else {
+        elTimer.innerText = gGame.secsPassed;
+    }
     gGame.secsPassed++;
 }
 

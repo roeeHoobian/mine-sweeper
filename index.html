@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-
     <title>Mine Sweepers</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body onload="init()">
-
     <div class="game-body">
         <h1>Mine Sweeper</h1>
         <div class="stats">
             <div class="lives-container">
                 <span>LIVES:</span><span class="lives-span"></span>
             </div>
+            <div class="mines-counter">💣X <span class="mines-counter-span"></span></div>
+            <div class="flags-counter">🚩X <span class="flags-counter-span"></span></div>
             <div class="time-container">
                 <span class="timer-span"> 000</span><span>⏰</span>
                 <div class="best-time-container hidden">
@@ -35,7 +35,6 @@
             </div>
         </div>
         <div class="smile" onclick="init()">🙂</div>
-
         <table class="mines-table"></table>
         <div class="buttons">
             <button class="dificultty-btn" onclick="chooseDifficulty(this, 4, 2)">EASY</button>
@@ -47,12 +46,9 @@
         <img class="boots" src="./imges/boots.png" alt="">
     </div>
 
-
-
     <script src="js/main.js"></script>
     <script src="js/cell.js"></script>
     <script src="js/util.js"></script>
-
 </body>
 
 </html>

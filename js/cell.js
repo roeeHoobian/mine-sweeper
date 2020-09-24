@@ -11,7 +11,7 @@ function cellClicked(cell, i, j) {
         hintTimeOut = setTimeout(() => {
             gGame.isHint = false;
             hintHideNegs(positions, gBoard, i, j);
-        }, 1000);
+        }, 600);
         return;
     }
     if (currCell.isMine) {
@@ -19,11 +19,12 @@ function cellClicked(cell, i, j) {
         cell.classList.add('mine-revaeled');
         gGame.lives--;
         updateLives();
-        setTimeout(() => {
+        var clearMineTimeOut = setTimeout(() => {
             cell.innerText = EMPTY;
             cell.classList.remove('mine-revaeled');
         }, 1000);
         if (currCell.isMine && gGame.lives === 0) {
+            clearTimeout(clearMineTimeOut);
             clearInterval(timer);
             cell.innerText = MINE;
             cell.classList.add('mine-revaeled');
@@ -46,13 +47,14 @@ function cellClicked(cell, i, j) {
     }
 }
 
+
 function fullExpand(i, j) {
     emptyPositions = revealAllNegs(i, j, gBoard);
     if (!emptyPositions.length === 0) return;
     for (var f = 0; f < emptyPositions.length; f++) {
         var currPosI = emptyPositions[f].i;
         var currPosJ = emptyPositions[f].j;
-        emptyPositions.shift();
+        emptyPositions.splice(f, 1);
         revealAllNegs(currPosI, currPosJ, gBoard);
     }
 
@@ -67,6 +69,7 @@ function revealAllNegs(iPos, jPos, board) {
             if (currCell.isMine) continue;
             if (currCell.isShown) continue;
             if (currCell.isMarked) continue;
+            currCell.isShown = true;
             gGame.shownCount++;
             var negsCount = setMinesNegsCount(i, j, board);
             if (!negsCount) {
@@ -76,9 +79,9 @@ function revealAllNegs(iPos, jPos, board) {
             var elCell = document.querySelector(`.cell${i}-${j}`);
             elCell.innerText = (negsCount === 0) ? EMPTY : negsCount;
             elCell.classList.add('shown');
-            currCell.isShown = true;
         }
     }
+    console.log(emptyPositions)
     return emptyPositions;
 }
 
@@ -148,6 +151,8 @@ function markCell(cell, i, j) {
         cell.innerText = EMPTY;
         currCell.isMarked = false;
         gGame.markedCount--;
+        updateMarkedCounter();
+
         return;
     }
     if (currCell.isShown) return;
@@ -155,6 +160,7 @@ function markCell(cell, i, j) {
     cell.innerText = FLAG;
     currCell.isMarked = true;
     gGame.markedCount++;
+    updateMarkedCounter();
     checkGameOver(gBoard);
 }
 
