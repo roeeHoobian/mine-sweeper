@@ -15,6 +15,7 @@ function cellClicked(cell, i, j) {
         return;
     }
     if (currCell.isMine) {
+        blastEffect();
         cell.innerText = MINE;
         cell.classList.add('mine-revaeled');
         gGame.lives--;
@@ -114,9 +115,12 @@ function hintHideNegs(positions, board) {
         elCell.classList.remove('shown');
         if (cell.isMine) {
             elCell.innerText = '';
+        } else if (cell.isMarked) {
+            elCell.innerText = FLAG;
         } else {
             elCell.innerText = EMPTY;
         }
+
     }
 }
 
@@ -178,4 +182,13 @@ function setMinesNegsCount(iPos, jPos, board) {
 
 function revealCell(cell) {
     cell.classList.add('shown');
+}
+
+function blastEffect() {
+    var body = document.querySelector('body');
+    body.classList.add('blasted');
+    setTimeout(() => {
+        body.classList.remove('blasted');
+
+    }, 80);
 }

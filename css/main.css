@@ -1,17 +1,23 @@
 body {
-    background-image: radial-gradient(circle, #ba9b5e14, #b4a681);
+    background-image: radial-gradient(circle, #ba9b5e14, #0e0908);
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-width: 750px;
     overflow: hidden;
 }
 
+.blasted {
+    background-image: radial-gradient(circle, #ba9b5e14, #e27c67);
+    transition: all;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+    transform: scale(1.03)
+}
+
 h1 {
     margin-top: 10px;
     padding-top: 10px;
-    color: snow;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-stretch: wider;
     letter-spacing: 0.5em;
     color: #2a2927;
     text-shadow: 2px 2px 25px white;
@@ -135,30 +141,36 @@ td:hover {
 .best-time-h2 {
     font-size: 0.6em;
     font-weight: 500;
+    color: #d6e0f0;
 }
 
 .time-container {
     position: absolute;
     right: 37%;
-    top: -5%;
+    top: 5%;
     font-size: 1.2em;
     display: inline;
 }
 
 .best-time-container {
     width: 150px;
+    margin: 0;
+    padding: 0;
+    margin-top: -12px;
+    color: #d6e0f0;
 }
 
 .lives-container {
     position: absolute;
     left: 3%;
-    top: 13%;
+    top: 10%;
+    font-size: 0.8em;
 }
 
 .hints-container {
     position: absolute;
     right: -141%;
-    top: 7%;
+    top: -3%;
     width: 100px;
 }
 
@@ -176,8 +188,8 @@ td:hover {
 .safe-container {
     position: absolute;
     font-size: 24px;
-    right: -80%;
-    top: 13%;
+    right: -70%;
+    top: 4%;
     width: 100px;
 }
 
@@ -230,10 +242,12 @@ td:hover {
     position: absolute;
     left: 2%;
     top: 55%;
+    font-size: 0.8em;
 }
 
 .flags-counter {
     position: absolute;
-    left: 19%;
-    top: 55%;
+    left: 15%;
+    top: 56%;
+    font-size: 0.8em;
 }

@@ -44,6 +44,7 @@ function init() {
     updateHints();
     updateSafes();
     updateMinesCounter();
+    updateMarkedCounter();
 }
 
 function initStats() {
