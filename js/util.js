@@ -121,6 +121,7 @@ function showAllMines(board) {
     }
 }
 
+
 window.oncontextmenu = (e) => {
     e.preventDefault();
 }

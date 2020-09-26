@@ -20,8 +20,11 @@ var gGame = {
 }
 var isFirstCellRevealed = false;
 var emptyPositions = [];
+var gMoves = [];
 var timer;
 var hintTimeOut;
+var hideMineTimeOut;
+
 
 const MINE = '💣';
 const FLAG = '🚩';
@@ -49,15 +52,16 @@ function init() {
 
 function initStats() {
     timer = 0;
+    gMoves = [];
     gGame.lives = 3;
     gGame.hints = 3;
     gGame.isOn = false;
+    emptyPositions = [];
     gGame.safeMoves = 3;
     gGame.isHint = false;
     gGame.shownCount = 0;
-    gGame.markedCount = 0;
     gGame.secsPassed = 0;
-    emptyPositions = [];
+    gGame.markedCount = 0;
     isFirstCellRevealed = false;
     var elSmile = document.querySelector('.smile');
     elSmile.innerText = PLAYER;
@@ -131,6 +135,7 @@ function checkGameOver() {
 }
 
 function useSafe(elSafe) {
+    if (!gGame.isOn) return;
     if (elSafe.classList.contains('safe-used')) return;
     if (!isFirstCellRevealed) {
         alert('Sorry, You Cant Use "SAFE-MOVE" On First Move.')
@@ -146,9 +151,9 @@ function useSafe(elSafe) {
         j: +`${currCell[0].j}`
     };
     var elCell = document.querySelector(`.cell${currPos.i}-${currPos.j}`)
-    elCell.classList.add('safe-cell')
+    elCell.classList.add('safe-cell');
     setTimeout(() => {
-        elCell.classList.remove('safe-cell')
+        elCell.classList.remove('safe-cell');
     }, 500);
 }
 
@@ -167,9 +172,10 @@ function updateSafes() {
 }
 
 function useHint(elHint) {
+    if (!gGame.isOn) return;
     if (elHint.classList.contains('hint-used')) return;
     if (!isFirstCellRevealed) {
-        alert('Sorry, You Cant Use "Hint" On First Move.')
+        alert('Sorry, You Cant Use "Hint" On First Move.');
         return;
     }
     gGame.isHint = true;
@@ -208,4 +214,54 @@ function updateMinesCounter() {
 function updateMarkedCounter() {
     var elMarkedStats = document.querySelector('.flags-counter-span');
     elMarkedStats.innerText = gGame.markedCount;
+}
+
+
+function saveMove() {
+    var boardCellsStates = [];
+    var currCellState = {};
+    for (var i = 0; i < gLevel.size; i++) {
+        for (var j = 0; j < gLevel.size; j++) {
+            currCellState.flags = gGame.markedCount;
+            currCellState.lives = gGame.lives;
+            currCellState.isShown = gBoard[i][j].isShown;
+            currCellState.isMarked = gBoard[i][j].isMarked;
+            boardCellsStates.push(currCellState);
+            currCellState = {};
+        }
+    }
+    gMoves.push(boardCellsStates);
+}
+
+function undo() {
+    if (!gGame.isOn) return;
+    if (gMoves.length < 2) {
+        alert('Sorry, Cant Undo from here :(');
+        return;
+    }
+    var counter = 0;
+    var prevMoveIdx = gMoves.length - 2
+    for (var i = 0; i < gLevel.size; i++) {
+        for (var j = 0; j < gLevel.size; j++) {
+            var cell = gBoard[i][j];
+            var elCell = document.querySelector(`.cell${i}-${j}`);
+            cell.isShown = gMoves[prevMoveIdx][counter].isShown;
+            cell.isMarked = gMoves[prevMoveIdx][counter].isMarked;
+            if (cell.isMarked) {
+                elCell.innerText = FLAG;
+            }
+            if (cell.isShown) {
+                elCell.classList.add('shown');
+            } else if (!cell.isMarked) {
+                elCell.classList.remove('shown');
+                elCell.innerText = EMPTY;
+            }
+            counter++;
+        }
+    }
+    gGame.lives = gMoves[prevMoveIdx][0].lives;
+    updateLives();
+    gGame.markedCount = gMoves[prevMoveIdx][0].flags;
+    updateMarkedCounter();
+    gMoves.pop();
 }

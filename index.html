@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>Mine Sweepers</title>
+    <title>Mine Sweeper</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body onload="init()">
     <div class="game-body">
-        <h1>Mine Sweeper</h1>
+        <h1></h1>
         <div class="stats">
             <div class="lives-container">
                 <span>LIVES:</span><span class="lives-span"></span>
@@ -20,7 +20,6 @@
                 <div class="best-time-container hidden">
                     <h5 class="best-time-h2">Best Time: <span class="best-time"></span></h2>
                 </div>
-
                 <div class="safe-container">
                     <span class="safe0" onclick="useSafe(this)"></span>
                     <span class="safe1" onclick="useSafe(this)"></span>
@@ -44,6 +43,8 @@
         <img class="ak-47" src="./imges/ak.png">
         <img class="ribbon" src="./imges/ribbon.png" alt="">
         <img class="boots" src="./imges/boots.png" alt="">
+        <img class="undu-btn" src="./imges/undo-btn.png" onclick="undo()" alt="Undo">
+
     </div>
 
     <script src="js/main.js"></script>

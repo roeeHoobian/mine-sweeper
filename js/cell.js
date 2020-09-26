@@ -20,20 +20,12 @@ function cellClicked(cell, i, j) {
         cell.classList.add('mine-revaeled');
         gGame.lives--;
         updateLives();
-        var clearMineTimeOut = setTimeout(() => {
+        hideMineTimeOut = setTimeout(() => {
             cell.innerText = EMPTY;
             cell.classList.remove('mine-revaeled');
         }, 1000);
-        if (currCell.isMine && gGame.lives === 0) {
-            clearTimeout(clearMineTimeOut);
-            clearInterval(timer);
-            cell.innerText = MINE;
-            cell.classList.add('mine-revaeled');
-            showAllMines(gBoard, cell);
-            revealAllNegsCounts(gBoard);
-            var elSmile = document.querySelector('.smile');
-            elSmile.innerText = LOOSE;
-            gGame.isOn = false;
+        if (gGame.lives === 0) {
+            gameOver(cell);
         }
     } else {
         currCell.isShown = true;
@@ -46,6 +38,43 @@ function cellClicked(cell, i, j) {
             fullExpand(i, j);
         }
     }
+    saveMove();
+}
+
+
+function gameOver(cell) {
+    clearInterval(timer);
+    clearTimeout(hideMineTimeOut);
+    cell.innerText = MINE;
+    cell.classList.add('mine-revaeled');
+    showAllMines(gBoard, cell);
+    revealAllNegsCounts(gBoard);
+    var elSmile = document.querySelector('.smile');
+    elSmile.innerText = LOOSE;
+    gGame.isOn = false;
+}
+
+function firstCellReveal(cell, i, j) {
+    if (isFirstCellRevealed) return;
+    var currCell = gBoard[i][j];
+    currCell.isShown = true;
+    gGame.shownCount++;
+    if (!currCell.isMarked) revealCell(cell);
+    var allCellsPos = getAllCellsPositions(gBoard);
+    placeMines(gBoard, gLevel.mines, allCellsPos);
+    gGame.isOn = true;
+    if (!timer) timer = setInterval(updateTime, 1000);
+    isFirstCellRevealed = true;
+    var negsCount = setMinesNegsCount(i, j, gBoard);
+    if (negsCount === 0) {
+        cell.innerText = EMPTY;
+        revealAllNegs(i, j, gBoard, cell);
+    } else {
+        cell.innerText = negsCount;
+    }
+    saveMove();
+
+    return;
 }
 
 
@@ -82,30 +111,10 @@ function revealAllNegs(iPos, jPos, board) {
             elCell.classList.add('shown');
         }
     }
-    console.log(emptyPositions)
     return emptyPositions;
 }
 
-function firstCellReveal(cell, i, j) {
-    if (isFirstCellRevealed) return;
-    var currCell = gBoard[i][j];
-    currCell.isShown = true;
-    gGame.shownCount++;
-    if (!currCell.isMarked) revealCell(cell);
-    var allCellsPos = getAllCellsPositions(gBoard);
-    placeMines(gBoard, gLevel.mines, allCellsPos);
-    gGame.isOn = true;
-    if (!timer) timer = setInterval(updateTime, 1000);
-    isFirstCellRevealed = true;
-    var negsCount = setMinesNegsCount(i, j, gBoard);
-    if (negsCount === 0) {
-        cell.innerText = EMPTY;
-        revealAllNegs(i, j, gBoard, cell);
-    } else {
-        cell.innerText = negsCount;
-    }
-    return;
-}
+
 
 function hintHideNegs(positions, board) {
     for (var h = 0; h < positions.length; h++) {
@@ -165,6 +174,7 @@ function markCell(cell, i, j) {
     currCell.isMarked = true;
     gGame.markedCount++;
     updateMarkedCounter();
+    saveMove();
     checkGameOver(gBoard);
 }
 
