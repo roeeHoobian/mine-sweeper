@@ -13,12 +13,12 @@ function showInfo() {
                                       there on the board. you need the mark 
                                       all of them with red flags to win the game.</p>
                             <p>🚩 - Red flag. You put it with right click on a cell </p>
-                            <p>⏰- The timer. You need to find all the mines as fast as you can.</p>
-                            <p>👁️‍🗨️- Hint- Press on it and then press on the board. it will give you
-                            a quick peek the neighbors of the desired cell.</p>
-                            <p>☮️- Safe Spot- Use it to get a sure cell to click on. (pay attention:
+                            <p>⏰ - The timer. You need to find all the mines as fast as you can.</p>
+                            <p>👁️‍🗨️ - Hint- Press on it and then press on the board. it will give you
+                            a quick peek to the neighbors of the desired cell.</p>
+                            <p>☮️ - Safe Spot- Use it to get a sure cell to click on. (pay attention:
                                 the safe spot apears for very short time).</p>
-                               <p> ⟲ - Undo- It let you go one step rewind.</p>
+                               <p> ⟲ - Undo- It let you go one step rewind on each press.</p>
 
 
                     </div>`;
