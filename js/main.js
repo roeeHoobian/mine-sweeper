@@ -19,7 +19,8 @@ var gGame = {
     isHint: false
 }
 var isFirstCellRevealed = false;
-var emptyPositions = [];
+var gEmptyPositions = [];
+var gPrevPositions = [];
 var gMoves = [];
 var timer;
 var hintTimeOut;
@@ -48,6 +49,8 @@ function init() {
     updateSafes();
     updateMinesCounter();
     updateMarkedCounter();
+    clearPrevNegs(gPrevPositions);
+
 }
 
 function initStats() {
@@ -56,7 +59,7 @@ function initStats() {
     gGame.lives = 3;
     gGame.hints = 3;
     gGame.isOn = false;
-    emptyPositions = [];
+    gEmptyPositions = [];
     gGame.safeMoves = 3;
     gGame.isHint = false;
     gGame.shownCount = 0;
@@ -90,7 +93,9 @@ function renderBoard(board) {
         for (var j = 0; j < board.length; j++) {
             htmlStr += `<td class = "cell${i}-${j}" onclick = 
             "cellClicked(this,${i},${j})"
-             oncontextmenu="markCell(this,${i},${j})">`;
+             oncontextmenu="markCell(this,${i},${j})"
+             onmouseover="borderNegs(${i},${j})"
+             onmouseout="clearPrevNegs(gPrevPositions)">`;
             htmlStr += '</td>';
         }
         htmlStr += '</td>';

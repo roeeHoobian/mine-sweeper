@@ -1,5 +1,38 @@
 'use strict'
 
+function showInfo() {
+    var htmlStr = `<div class="modal-blackout"></div>
+                    <div class="modal-body">
+                        <div class="modal-header">
+                            <button class="close-modal-btn" onclick="closeModal()">X</button>
+                            <h1>Information</h1>
+                        </div>
+                        <p>🖤🖤🖤 - Lives: If by mistake you blowed yourself up three times
+                                      the game will over. </p>
+                         <p>💣X 12 - This counter show you how many mines
+                                      there on the board. you need the mark 
+                                      all of them with red flags to win the game.</p>
+                            <p>🚩 - Red flag. You put it with right click on a cell </p>
+                            <p>⏰- The timer. You need to find all the mines as fast as you can.</p>
+                            <p>👁️‍🗨️- Hint- Press on it and then press on the board. it will give you
+                            a quick peek the neighbors of the desired cell.</p>
+                            <p>☮️- Safe Spot- Use it to get a sure cell to click on. (pay attention:
+                                the safe spot apears for very short time).</p>
+                               <p> ⟲ - Undo- It let you go one step rewind.</p>
+
+
+                    </div>`;
+    var elBody = document.querySelector('body');
+    elBody.innerHTML += htmlStr;
+}
+
+function closeModal() {
+    document.querySelector('.modal-blackout').remove();
+    document.querySelector('.modal-body').remove();
+
+}
+
+
 function SaveBestTime(difficulty, time) {
     if (!time) return;
     switch (difficulty) {
