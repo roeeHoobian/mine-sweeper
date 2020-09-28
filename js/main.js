@@ -16,15 +16,17 @@ var gGame = {
     bestTimeHard: Infinity,
     hints: 3,
     safeMoves: 3,
-    isHint: false
+    isHint: false,
+    isManualMode: false,
+    isMineSet: false,
 }
 var isFirstCellRevealed = false;
 var gEmptyPositions = [];
 var gPrevPositions = [];
 var gMoves = [];
-var timer;
-var hintTimeOut;
-var hideMineTimeOut;
+var gTimer;
+var gHintTimeOut;
+var gHideMineTimeOut;
 
 
 const MINE = '💣';
@@ -38,7 +40,7 @@ const HINT = '👁️‍🗨️';
 const SAFE = '☮️';
 
 function init() {
-    clearInterval(timer);
+    clearInterval(gTimer);
     initStats();
     updateLives();
     updateTime();
@@ -47,6 +49,7 @@ function init() {
     updateBestTime(gGame.difficulty);
     updateHints();
     updateSafes();
+    updateManualMode();
     updateMinesCounter();
     updateMarkedCounter();
     clearPrevNegs(gPrevPositions);
@@ -54,7 +57,7 @@ function init() {
 }
 
 function initStats() {
-    timer = 0;
+    gTimer = 0;
     gMoves = [];
     gGame.lives = 3;
     gGame.hints = 3;
@@ -65,6 +68,7 @@ function initStats() {
     gGame.shownCount = 0;
     gGame.secsPassed = 0;
     gGame.markedCount = 0;
+    gGame.isMineSet = false;
     isFirstCellRevealed = false;
     var elSmile = document.querySelector('.smile');
     elSmile.innerText = PLAYER;
@@ -127,7 +131,7 @@ function chooseDifficulty(btn, size, mines) {
 function checkGameOver() {
     if (gGame.markedCount === gLevel.mines &&
         gGame.shownCount === (gLevel.size ** 2 - gLevel.mines)) {
-        clearInterval(timer);
+        clearInterval(gTimer);
         var elSmile = document.querySelector('.smile');
         elSmile.innerText = WON;
         SaveBestTime(gGame.difficulty, gGame.secsPassed);
@@ -212,6 +216,18 @@ function updateLives() {
 }
 
 function updateMinesCounter() {
+    if (!gGame.isManualMode && !gGame.isMineSet)
+        switch (gGame.difficulty) {
+            case 'EASY':
+                gLevel.mines = 2;
+                break;
+            case 'MEDIUM':
+                gLevel.mines = 12;
+                break;
+            case 'HARD':
+                gLevel.mines = 30;
+                break;
+        }
     var elMinesStats = document.querySelector('.mines-counter-span');
     elMinesStats.innerText = gLevel.mines;
 }
@@ -269,4 +285,53 @@ function undo() {
     gGame.markedCount = gMoves[prevMoveIdx][0].flags;
     updateMarkedCounter();
     gMoves.pop();
+}
+
+
+function manualMode() {
+    if (gGame.isOn) return;
+    gGame.isManualMode = (!gGame.isManualMode) ? true : false;
+    var elShovel = document.querySelector('.shovel');
+    var elAllCells = document.querySelectorAll('td');
+    var elMinesCounter = document.querySelector('.mines-counter');
+    if (gGame.isManualMode) {
+        gLevel.mines = 0;
+        updateMinesCounter();
+        elShovel.classList.add('manual-mode-on');
+        elMinesCounter.classList.add('manual-mode-on');
+        for (var i = 0; i < elAllCells.length; i++) {
+            elAllCells[i].classList.add('cell-manual-mode-on');
+        }
+    } else if (gGame.isMineSet) {
+        elShovel.classList.remove('manual-mode-on');
+        elMinesCounter.classList.remove('manual-mode-on');
+        for (var i = 0; i < elAllCells.length; i++) {
+            elAllCells[i].classList.remove('cell-manual-mode-on');
+        }
+        gGame.isManualMode = false;
+        gGame.isOn = true;
+        isFirstCellRevealed = true;
+        var allCells = getAllCellsPositions(gBoard);
+        for (var i = 0; i < allCells.length; i++) {
+            var iPos = allCells[i].i;
+            var jPos = allCells[i].j;
+            var elCell = document.querySelector(`.cell${iPos}-${jPos}`);
+            elCell.innerText = EMPTY;
+        }
+    } else {
+        elShovel.classList.remove('manual-mode-on');
+        elMinesCounter.classList.remove('manual-mode-on');
+        for (var i = 0; i < elAllCells.length; i++) {
+            elAllCells[i].classList.remove('cell-manual-mode-on');
+        }
+    }
+}
+
+
+function updateManualMode() {
+    gGame.isManualMode = false;
+    var elShovel = document.querySelector('.shovel');
+    elShovel.classList.remove('manual-mode-on');
+    var elMinesCounter = document.querySelector('.mines-counter');
+    elMinesCounter.classList.remove('manual-mode-on');
 }

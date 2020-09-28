@@ -7,20 +7,21 @@ function showInfo() {
                             <button class="close-modal-btn" onclick="closeModal()">X</button>
                             <h1>Information</h1>
                         </div>
-                        <p>🖤🖤🖤 - Lives: If by mistake you blowed yourself up three times
+                        <p>🖤🖤🖤 - Lives - If by mistake you blowed yourself up three times
                                       the game will over. </p>
                          <p>💣X 12 - This counter show you how many mines
                                       there on the board. you need the mark 
                                       all of them with red flags to win the game.</p>
-                            <p>🚩 - Red flag. You put it with right click on a cell </p>
-                            <p>⏰ - The timer. You need to find all the mines as fast as you can.</p>
-                            <p>👁️‍🗨️ - Hint- Press on it and then press on the board. it will give you
+                            <p>🚩 - Red flag - You put it with right click on a cell </p>
+                            <p>⏰ - The timer - You need to find all the mines as fast as you can.</p>
+                            <p>👁️‍🗨️ - Hint - Press on it and then press on the board. it will give you
                             a quick peek to the neighbors of the desired cell.</p>
                             <p>☮️ - Safe Spot- Use it to get a sure cell to click on. (pay attention:
                                 the safe spot apears for very short time).</p>
-                               <p> ⟲ - Undo- It let you go one step rewind on each press.</p>
-
-
+                               <p><img style="width: 30px;" src="./imges/undo-btn.png" > - Undo - This 
+                               button let you go back one step on each press.</p>
+                             <p>  <img style="width: 10px;" src="./imges/shovel.png"> - Manual Mode - 
+                             press once, then place mines wherever you want, then press again to play.</p>
                     </div>`;
     var elBody = document.querySelector('body');
     elBody.innerHTML += htmlStr;
@@ -29,7 +30,6 @@ function showInfo() {
 function closeModal() {
     document.querySelector('.modal-blackout').remove();
     document.querySelector('.modal-body').remove();
-
 }
 
 
@@ -91,6 +91,7 @@ function updateBestTime(difficulty) {
     }
 }
 
+
 function getAllEmptyCells(board) {
     var emptyCellPositions = [];
     for (var i = 0; i < board.length; i++) {
@@ -106,6 +107,7 @@ function getAllEmptyCells(board) {
     return emptyCellPositions;
 }
 
+
 function getAllCellsPositions(board) {
     var cellsPositions = [];
     for (var i = 0; i < board.length; i++) {
@@ -117,6 +119,7 @@ function getAllCellsPositions(board) {
     }
     return cellsPositions;
 }
+
 
 function updateTime() {
     var elTimer = document.querySelector('.timer-span');
@@ -130,6 +133,7 @@ function updateTime() {
     gGame.secsPassed++;
 }
 
+
 function revealAllNegsCounts(board) {
     for (var i = 0; i < board.length; i++) {
         for (var j = 0; j < board[i].length; j++) {
@@ -142,6 +146,7 @@ function revealAllNegsCounts(board) {
         }
     }
 }
+
 
 function showAllMines(board) {
     for (var i = 0; i < board.length; i++) {

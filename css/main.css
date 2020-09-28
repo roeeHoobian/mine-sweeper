@@ -321,11 +321,10 @@ td:hover {
 
 .modal-body {
     background-image: url("../imges/militarybg.jpg");
-    /* background-color: rgb(255, 255, 255); */
     position: relative;
     width: 400px;
-    height: 600px;
-    top: -750px;
+    height: 700px;
+    top: -810px;
     left: 5px;
     opacity: 1;
     margin: auto;
@@ -338,9 +337,10 @@ td:hover {
 }
 
 .close-modal-btn {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     float: right;
+    text-align: center;
 }
 
 p {
@@ -350,4 +350,41 @@ p {
     text-align: left;
     color: white;
     text-shadow: 1px -1px 15px white;
+}
+
+.shovel {
+    position: absolute;
+    top: 280px;
+    left: 16px;
+}
+
+.shovel:hover {
+    transform: rotate(6deg) scale(1.05);
+}
+
+.manual-mode-on {
+    -webkit-filter: drop-shadow(2px -1px 3px #ffbb00) drop-shadow(-2px 1px 3px #ffbb00);
+    filter: drop-shadow(2px -1px 3px #ffbb00) drop-shadow(-2px 1px 3px #3d7ee7);
+    transition: -webkit-filter;
+    animation-name: manual-mode;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+}
+
+@keyframes manual-mode {
+    from {
+        -webkit-filter: drop-shadow(2px -1px 3px #ffbb00) drop-shadow(-2px 1px 3px #ffbb00);
+        filter: drop-shadow(2px -1px 3px #ffbb00) drop-shadow(-2px 1px 3px #3d7ee7);
+        transition: -webkit-filter;
+    }
+    to {
+        -webkit-filter: drop-shadow(-2px -1px 3px #3d7ee7) drop-shadow(2px 1px 3px #3d7ee7);
+        filter: drop-shadow(-2px -1px 3px #3d7ee7) drop-shadow(2px 1px 3px #ffbb00);
+        transition: -webkit-filter;
+    }
+}
+
+.cell-manual-mode-on {
+    background-color: #fbe7c3;
 }
