@@ -69,6 +69,7 @@ function initStats() {
     gGame.secsPassed = 0;
     gGame.markedCount = 0;
     gGame.isMineSet = false;
+    gGame.isManualMode = false;
     isFirstCellRevealed = false;
     var elSmile = document.querySelector('.smile');
     elSmile.innerText = PLAYER;
@@ -318,12 +319,15 @@ function manualMode() {
             var elCell = document.querySelector(`.cell${iPos}-${jPos}`);
             elCell.innerText = EMPTY;
         }
+        updateMinesCounter();
     } else {
+        gGame.isManualMode = false;
         elShovel.classList.remove('manual-mode-on');
         elMinesCounter.classList.remove('manual-mode-on');
         for (var i = 0; i < elAllCells.length; i++) {
             elAllCells[i].classList.remove('cell-manual-mode-on');
         }
+        updateMinesCounter();
     }
 }
 
