@@ -11,6 +11,9 @@ function cellClicked(cell, i, j) {
     }
     if (currCell.isMarked) return;
     if (!isFirstCellRevealed && !gGame.isMineSet) firstCellReveal(cell, i, j);
+    if (!gTimer && isFirstCellRevealed) {
+        gTimer = setInterval(updateTime, 1000);
+    }
     if (!gGame.isOn) return;
     if (currCell.isShown) return;
     if (gGame.isHint) {
